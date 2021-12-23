@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/TankCombat2D/TankCombat2D_Mainmenu/TankCombat2D_Mainmenu.unity
+    guid: 8aa628df790a5472385b98c37aee18fb
+  - enabled: 1
+    path: Assets/Scenes/TankCombat2D/TankCombat2D_Newgame/TankCombat2D_Newgame_.unity
+    guid: c7e5795154f444642930a8b14931b61b
+  - enabled: 1
+    path: Assets/Scenes/TankCombat2D/TankCombat2D_Gameover/TankCombat2D_Gameover_.unity
+    guid: 82bb14130cd0941e5ab73bc29c521d83
+  - enabled: 1
+    path: Assets/Scenes/TankCombat2D/TankCombat2D_Playing/TankCombat2D_Playing_.unity
+    guid: 3b77d2f3d8d0d4beaba067bed4edde72
+  - enabled: 1
+    path: Assets/Scenes/TankCombat2D/TankCombat2D_WaveComplete/TankCombat2D_WaveComplete_.unity
+    guid: 99a42386bf4024040858b78069b3b43d
+  - enabled: 1
+    path: Assets/Scenes/TankCombat2D/TC2D_UI/TC2D_UI_.unity
+    guid: 40520d92217db449aa7c68d1dcede9df
+  - enabled: 1
+    path: Assets/Scenes/TankCombat2D/TC2DBitmapLevels/TC2DBitmapLevels_.unity
+    guid: 8908be84120cf4146aec5b9600e1e21a
+  - enabled: 1
+    path: Assets/Scenes/TankCombat2D/TC2DLevel1/TC2DLevel1_.unity
+    guid: 4e06b73bc478c44be959646904dba7aa
+  - enabled: 1
+    path: Assets/Scenes/TankCombat2D/TC2DPlayer/TC2DPlayer_.unity
+    guid: df84651b8b7894a43a16e899b5362d9b
