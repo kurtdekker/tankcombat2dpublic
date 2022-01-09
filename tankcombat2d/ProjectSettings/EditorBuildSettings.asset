@@ -9,14 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/TankCombat2D/TankCombat2D_Mainmenu/TankCombat2D_Mainmenu.unity
     guid: 8aa628df790a5472385b98c37aee18fb
   - enabled: 1
-    path: Assets/Scenes/TankCombat2D/TankCombat2D_Newgame/TankCombat2D_Newgame_.unity
-    guid: c7e5795154f444642930a8b14931b61b
-  - enabled: 1
     path: Assets/Scenes/TankCombat2D/TankCombat2D_Gameover/TankCombat2D_Gameover_.unity
     guid: 82bb14130cd0941e5ab73bc29c521d83
   - enabled: 1
+    path: Assets/Scenes/TankCombat2D/TankCombat2D_Newgame/TankCombat2D_Newgame_.unity
+    guid: c7e5795154f444642930a8b14931b61b
+  - enabled: 1
     path: Assets/Scenes/TankCombat2D/TankCombat2D_Playing/TankCombat2D_Playing_.unity
     guid: 3b77d2f3d8d0d4beaba067bed4edde72
+  - enabled: 1
+    path: Assets/Scenes/TankCombat2D/TankCombat2D_Radar/TankCombat2D_Radar_.unity
+    guid: 35642c4deafa34d8c8ce419b11a077a1
   - enabled: 1
     path: Assets/Scenes/TankCombat2D/TankCombat2D_WaveComplete/TankCombat2D_WaveComplete_.unity
     guid: 99a42386bf4024040858b78069b3b43d

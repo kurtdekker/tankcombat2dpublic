@@ -1,7 +1,7 @@
 ﻿/*
 	The following license supersedes all notices in the source code.
 
-	Copyright (c) 2021 Kurt Dekker/PLBM Games All rights reserved.
+	Copyright (c) 2022 Kurt Dekker/PLBM Games All rights reserved.
 
 	http://www.twitter.com/kurtdekker
 
@@ -36,11 +36,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 namespace TankCombat2D
 {
 	public class TankCombat2D_Mainmenu : MonoBehaviour
 	{
+		public Button ButtonStart;
+
+		[Header("Input Scheme:")]
+		public Button ToggleInputScheme;
+		public Text DisplayInputScheme;
+
+		[Header("Camera Rotation:")]
+		public Button ToggleCameraRotation;
+		public Text DisplayCameraRotation;
+
 		void Start ()
 		{
 			Time.timeScale = 1.0f;
@@ -48,30 +60,62 @@ namespace TankCombat2D
 			TankCombat2DGameManager.Instance.ResetGame();
 
 			SceneHelper.LoadScene( "TC2D_UI_", additive: true);
+
+			ButtonStart.onClick.AddListener( delegate {
+				StartGame = true;	
+			});
+
+			ToggleInputScheme.onClick.AddListener( delegate {
+				PermanentSettings.CurrentTankInputScheme++;		// it will wrap in the validator
+
+				UpdateDisplayedControlScheme();
+			});
+
+			ToggleCameraRotation.onClick.AddListener( delegate {
+				PermanentSettings.CameraRotationEnabled = !PermanentSettings.CameraRotationEnabled;
+
+				UpdateDisplayedCameraRotation();
+			});
+
+			UpdateDisplayedControlScheme();
+			UpdateDisplayedCameraRotation();
+		}
+
+		bool StartGame;
+
+		void UpdateDisplayedControlScheme()
+		{
+			DisplayInputScheme.text = "INPUT SCHEME:\n" + PermanentSettings.CurrentTankInputScheme;
+		}
+
+		void UpdateDisplayedCameraRotation()
+		{
+			DisplayCameraRotation.text = "CAM ROTATE:\n" +
+				(PermanentSettings.CameraRotationEnabled ? "ENABLED" : "DISABLED");
 		}
 
 		void Update()
 		{
+			if (Input.GetKeyDown( KeyCode.C))
+			{
+				PermanentSettings.CurrentTankInputScheme++;
+				UpdateDisplayedControlScheme();
+			}
+
+			// prevent the control scheme button from keeping focus so
+			// that ENTER won't cycle it but will start game.
+			EventSystem.current.SetSelectedGameObject( ButtonStart.gameObject);
+
 			if (Time.timeSinceLevelLoad > 1.0f)
 			{
-				bool Restart = false;
-
-				if (Input.GetKey( KeyCode.Return) ||
-					Input.GetKey( KeyCode.Space) ||
-					false)
-				{
-					Restart = true;
-				}
-
-				if (Input.GetMouseButtonDown(0))
-				{
-					Restart = true;
-				}
-
-				if (Restart)
+				if (StartGame)
 				{
 					SceneHelper.LoadScene( "TankCombat2D_Newgame_");
 				}
+			}
+			else
+			{
+				StartGame = false;
 			}
 		}
 	}

@@ -69,6 +69,8 @@ namespace TankCombat2D
 				if (playerDyingTimer <= 0)
 				{
 					RemoveSurvivingEnemies();
+
+					StrayObjectToCleanUp.CleanThemAllUp();
 				}
 
 				return false;

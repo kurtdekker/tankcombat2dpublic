@@ -1,7 +1,7 @@
 ﻿/*
 	The following license supersedes all notices in the source code.
 
-	Copyright (c) 2021 Kurt Dekker/PLBM Games All rights reserved.
+	Copyright (c) 2022 Kurt Dekker/PLBM Games All rights reserved.
 
 	http://www.twitter.com/kurtdekker
 
@@ -52,5 +52,10 @@ namespace TankCombat2D
 		public static int PlayerLayer { get { return LayerMask.NameToLayer( s_Player); } }
 
 		public static int NotPlayerLayerMask { get { return ~(1 << PlayerLayer); } }
+
+		public static int NotEnemyOrPlayer { get { return ~(
+			(1 << LayerMask.NameToLayer( s_Enemy)) |
+			(1 << LayerMask.NameToLayer( s_Player)) |
+			0); } }
 	}
 }

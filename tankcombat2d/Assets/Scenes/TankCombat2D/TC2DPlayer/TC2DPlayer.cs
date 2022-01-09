@@ -107,47 +107,8 @@ namespace TankCombat2D
 
 		bool ready;
 
-		// inputs:
-		float turnTank;
-		float desiredDrive;
-		bool fireRequested;
-
 		// status
 		float currentDrive;
-
-		void GatherInputs()
-		{
-			turnTank = 0.0f;
-			desiredDrive = 0.0f;
-			desiredTurretHeading = currentTurretHeading;
-			fireRequested = false;
-
-			turnTank -= Input.GetAxisRaw( "Horizontal");
-			desiredDrive += Input.GetAxisRaw( "Vertical");
-
-			if (Input.GetKey( KeyCode.Alpha1))
-			{
-				desiredTurretHeading = +MaxTurretAngle;
-			}
-			if (Input.GetKey( KeyCode.Alpha2))
-			{
-				desiredTurretHeading = 0;
-			}
-			if (Input.GetKey( KeyCode.Alpha3))
-			{
-				desiredTurretHeading = -MaxTurretAngle;
-			}
-
-			if (Input.GetKeyDown( KeyCode.Space) ||
-				Input.GetKeyDown( KeyCode.LeftControl) ||
-				false)
-			{
-				fireRequested = true;
-			}
-
-			turnTank = Mathf.Clamp( turnTank, -1, 1);
-			desiredDrive = Mathf.Clamp( desiredDrive, -1, 1);
-		}
 
 		void TurnPlayer()
 		{
@@ -183,6 +144,7 @@ namespace TankCombat2D
 			Turret.localRotation = Quaternion.Euler (0, 0, currentTurretHeading);
 		}
 
+		bool firstRotate = true;
 		void MoveCamera()
 		{
 			// leave the Z unmolested, track only in X/Y
@@ -193,6 +155,20 @@ namespace TankCombat2D
 			position.y = transform.position.y;
 
 			cam.transform.position = position;
+
+			if (PermanentSettings.CameraRotationEnabled)
+			{
+				if (firstRotate)
+				{
+					cam.transform.rotation = transform.rotation;
+					firstRotate = false;
+				}
+				cam.transform.rotation = Quaternion.Slerp( cam.transform.rotation, transform.rotation, 5 * Time.deltaTime);
+			}
+			else
+			{
+				cam.transform.rotation = Quaternion.identity;
+			}
 		}
 
 		void Update ()

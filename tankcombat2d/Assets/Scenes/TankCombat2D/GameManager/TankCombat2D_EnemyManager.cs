@@ -1,7 +1,7 @@
 ﻿/*
 	The following license supersedes all notices in the source code.
 
-	Copyright (c) 2021 Kurt Dekker/PLBM Games All rights reserved.
+	Copyright (c) 2022 Kurt Dekker/PLBM Games All rights reserved.
 
 	http://www.twitter.com/kurtdekker
 
@@ -70,9 +70,43 @@ namespace TankCombat2D
 			return false;
 		}
 
+		void ProcessVisibility()
+		{
+			foreach( var enemy in Enemies)
+			{
+				if (enemy)
+				{
+					var fa = enemy.GetComponent<FadeableAgent>();
+
+					if (fa)
+					{
+						Vector3 origin = TC2DPlayer.Instance.transform.position;
+						Vector3 direction = fa.transform.position - origin;
+
+						var hit = Physics2D.Raycast(
+							origin: origin,
+							direction: direction,
+							distance: direction.magnitude,
+							layerMask: MyLayers.NotEnemyOrPlayer);
+						
+						if (hit.collider)
+						{
+							fa.SetDesiredAlpha( 0.0f);
+						}
+						else
+						{
+							fa.SetDesiredAlpha( 1.0f);
+						}
+					}
+				}
+			}
+		}
+
 		void ManageEnemies()
 		{
 			Enemies.RemoveAll( x => !x);
+
+			ProcessVisibility();
 
 			if (EnemiesRemainingToCreate > 0)
 			{

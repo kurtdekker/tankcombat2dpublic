@@ -32,6 +32,8 @@ namespace TankCombat2D
 
 			bullet.maxDistance = maxDistance;
 
+			StrayObjectToCleanUp.Attach( bullet.gameObject);
+
 			return bullet;
 		}
 

@@ -27,5 +27,10 @@ namespace TankCombat2D
 		{
 			get { return Resources.Load<GameObject>( "TC2DPrefabs/EnemyTankBozo_Prefab"); }
 		}
+
+		public static GameObject DestroyedTankPrefab
+		{
+			get { return Resources.Load<GameObject>( "TC2DPrefabs/DestroyedTank_Prefab"); }
+		}
 	}
 }

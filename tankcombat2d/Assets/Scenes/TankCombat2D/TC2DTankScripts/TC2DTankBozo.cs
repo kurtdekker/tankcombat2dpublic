@@ -82,6 +82,8 @@ namespace TankCombat2D
 			var enemy = Instantiate<GameObject>( EnemyPrefab, position, Quaternion.Euler( 0, 0, heading));
 			enemy.AddComponent<EnemyRegistrator>();
 			enemy.AddComponent<IsDeadlyToPlayer>();
+			FadeableAgent.Attach( enemy, 0);
+			OffscreenableAgent.Attach( enemy, Color.red);
 			return enemy;
 		}
 
@@ -131,6 +133,32 @@ namespace TankCombat2D
 			TankCombat2DGameManager.Instance.AddScore(1);
 
 			Instantiate<GameObject>( TC2DResources.Splatch2Prefab, transform.position, Quaternion.Euler( 0, 0, Random.Range( 0, 360)));
+
+			Instantiate<GameObject>(
+				TC2DResources.DestroyedTankPrefab,
+				transform.position,
+				Quaternion.Euler( 0, 0, Random.Range( 0, 360)));
+			
+#if false
+			{
+				var corpse = Instantiate<GameObject>(
+					TC2DResources.DestroyedTankPrefab,
+					transform.position,
+					Quaternion.Euler( 0, 0, Random.Range( 0, 360)));
+				DestructibleVehicle.Attach(
+					corpse,
+					Random.Range( 0.5f, 3.0f),
+					() => {
+						Instantiate<GameObject>(
+							TC2DResources.Splatch1Prefab,
+							corpse.transform.position,
+							Quaternion.Euler( 0, 0, Random.Range( 0, 360)));
+
+						// TODO: spread the parts out a bit?
+					}
+				);
+			}
+#endif
 
 			Destroy(gameObject);
 		}
